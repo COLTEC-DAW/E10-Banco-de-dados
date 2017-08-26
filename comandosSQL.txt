@@ -94,7 +94,7 @@ CREATE TABLE Exemplares
  SELECT * FROM Empréstimos WHERE Empréstimos.matriculauser = 1;
  SELECT * FROM Empréstimos WHERE Empréstimos.matriculauser = 1 AND Empréstimos.idBilioteca = 4;
  SELECT DISTINCT idExemplar FROM Empréstimos;
- SELECT DISTINCT idBiblioteca.nome FROM Empréstimos;
+ SELECT DISTINCT idBiblioteca FROM Empréstimos;
 
 
 
