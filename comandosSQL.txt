@@ -1,0 +1,102 @@
+
+CREATE TABLE Bibliotecas
+(nome varchar(180),
+ endereco varchar(180),
+ idbiblioteca int NOT NULL AUTO_INCREMENT,
+ PRIMARY KEY (idbiblioteca));
+
+  CREATE TABLE Usuários
+( Nome varchar(180),
+ Email varchar(180),
+ Curso varchar(180)
+ matricula int NOT NULL AUTO_INCREMENT,
+ PRIMARY KEY (matricula));
+
+CREATE TABLE Livros
+(Nome varchar(180),
+ Autor varchar(180),
+ Editora varchar(180),
+ ISBN varchar(180),
+ Tema varchar(180),
+ codLivro int NOT NULL AUTO_INCREMENT,
+ PRIMARY KEY (codLivro));
+
+CREATE TABLE Exemplares
+(Edição varchar(180),
+ Ano int,
+ codLivro int,
+ idBiblioteca int,
+ numPaginas int,
+ idExemplar int NOT NULL AUTO_INCREMENT,
+ PRIMARY KEY (idExemplar)); 
+
+ CREATE TABLE Empréstimos
+(matriculauser int,
+ idBiblioteca int,
+ idExemplar int,
+ dataemprestimo int,
+ datadevolucao int,
+ idemprestimo int NOT NULL AUTO_INCREMENT,
+ PRIMARY KEY (idemprestimo)); 
+
+ INSERT INTO Usuários (Nome, Email, Curso) VALUES ("Joao", "us1@email.com", "Info");
+ INSERT INTO Usuários (Nome, Email, Curso) VALUES ("US2", "us2@email.com", "Info");
+ INSERT INTO Usuários (Nome, Email, Curso) VALUES ("US3", "us3@email.com", "Info");
+ INSERT INTO Usuários (Nome, Email, Curso) VALUES ("US4", "us4@email.com", "Info");
+ INSERT INTO Usuários (Nome, Email, Curso) VALUES ("US5", "us5@email.com", "Info");
+ INSERT INTO Usuários (Nome, Email, Curso) VALUES ("US6", "us6@email.com", "Info");
+ INSERT INTO Usuários (Nome, Email, Curso) VALUES ("US7", "us7@email.com", "Info");
+ INSERT INTO Usuários (Nome, Email, Curso) VALUES ("US8", "us8@email.com", "Info");
+ INSERT INTO Usuários (Nome, Email, Curso) VALUES ("US9", "us9@email.com", "Info");
+ INSERT INTO Usuários (Nome, Email, Curso) VALUES ("US10", "us10@email.com", "Info");
+
+ INSERT INTO Bibliotecas (nome, endereco) VALUES ("Biblioteca Rua 1", "Rua 1");
+ INSERT INTO Bibliotecas (nome, endereco) VALUES ("Biblioteca Rua 2", "Rua 2");
+ INSERT INTO Bibliotecas (nome, endereco) VALUES ("Biblioteca Rua 3", "Rua 3");
+ INSERT INTO Bibliotecas (nome, endereco) VALUES ("Biblioteca Central", "Rua 4");
+
+ INSERT INTO Livros (Nome, Autor, Editora, ISBN, Tema) VALUES ("L1", "Autor1", "Letras", "123", "Romance");
+ INSERT INTO Livros (Nome, Autor, Editora, ISBN, Tema) VALUES ("L2", "Autor2", "Letras", "123", "Romance");
+ INSERT INTO Livros (Nome, Autor, Editora, ISBN, Tema) VALUES ("L3", "Autor3", "Letras", "123", "Computação");
+
+ INSERT INTO Exemplares (Edição, Ano, codLivro, idBiblioteca, numPaginas) VALUES ("SP 1", 2017, 1, 1, 123);
+ INSERT INTO Exemplares (Edição, Ano, codLivro, idBiblioteca, numPaginas) VALUES ("SP 2", 2017, 2, 1, 123);
+ INSERT INTO Exemplares (Edição, Ano, codLivro, idBiblioteca, numPaginas) VALUES ("SP 3", 2017, 3, 1, 123);
+ INSERT INTO Exemplares (Edição, Ano, codLivro, idBiblioteca, numPaginas) VALUES ("SP 4", 2017, 1, 1, 123);
+ INSERT INTO Exemplares (Edição, Ano, codLivro, idBiblioteca, numPaginas) VALUES ("SP 5", 2017, 2, 1, 123);
+ INSERT INTO Exemplares (Edição, Ano, codLivro, idBiblioteca, numPaginas) VALUES ("SP 6", 2017, 3, 1, 123);
+ INSERT INTO Exemplares (Edição, Ano, codLivro, idBiblioteca, numPaginas) VALUES ("SP 7", 2017, 1, 1, 123);
+ INSERT INTO Exemplares (Edição, Ano, codLivro, idBiblioteca, numPaginas) VALUES ("SP 8", 2017, 2, 1, 123);
+ INSERT INTO Exemplares (Edição, Ano, codLivro, idBiblioteca, numPaginas) VALUES ("SP 9", 2017, 3, 4, 123);
+ INSERT INTO Exemplares (Edição, Ano, codLivro, idBiblioteca, numPaginas) VALUES ("SP 10", 2017, 1, 4, 123);
+
+ ALTER TABLE Empréstimos
+ MODIFY COLUMN dataemprestimo VARCHAR(45);
+
+ ALTER TABLE Empréstimos
+ MODIFY COLUMN datadevolucao VARCHAR(45);
+
+ INSERT INTO Empréstimos (matriculauser, idBiblioteca, idExemplar, dataemprestimo, datadevolucao) VALUES (1, 1, 1, "12/06", "19/06");
+ INSERT INTO Empréstimos (matriculauser, idBiblioteca, idExemplar, dataemprestimo, datadevolucao) VALUES (2, 2, 2, "12/07", "19/07");
+ INSERT INTO Empréstimos (matriculauser, idBiblioteca, idExemplar, dataemprestimo, datadevolucao) VALUES (1, 1, 1, "12/08", "19/08");
+ INSERT INTO Empréstimos (matriculauser, idBiblioteca, idExemplar, dataemprestimo, datadevolucao) VALUES (1, 1, 1, "12/09", "19/09");
+ INSERT INTO Empréstimos (matriculauser, idBiblioteca, idExemplar, dataemprestimo, datadevolucao) VALUES (1, 1, 1, "12/10", "19/10");
+ INSERT INTO Empréstimos (matriculauser, idBiblioteca, idExemplar, dataemprestimo, datadevolucao) VALUES (1, 1, 1, "12/11", "19/11");
+ INSERT INTO Empréstimos (matriculauser, idBiblioteca, idExemplar, dataemprestimo, datadevolucao) VALUES (1, 1, 1, "12/12", "19/12");
+ INSERT INTO Empréstimos (matriculauser, idBiblioteca, idExemplar, dataemprestimo, datadevolucao) VALUES (1, 4, 1, "12/01", "19/01");
+
+
+ SELECT nome FROM Bibliotecas;
+ SELECT nome FROM Usuários WHERE Usuários.Curso = 'Info';
+ SELECT Nome, Autor FROM Livros WHERE Livros.Tema = 'Computação';
+ SELECT * FROM Exemplares WHERE Exemplares.Ano > 2010;
+ SELECT * FROM Exemplares WHERE Exemplares.idBiblioteca = 4;
+ SELECT * FROM Empréstimos WHERE Empréstimos.matriculauser = 1;
+ SELECT * FROM Empréstimos WHERE Empréstimos.matriculauser = 1 AND Empréstimos.idBilioteca = 4;
+ SELECT DISTINCT idExemplar FROM Empréstimos;
+ SELECT DISTINCT idBiblioteca.nome FROM Empréstimos;
+
+
+
+
+
