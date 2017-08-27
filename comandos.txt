@@ -1,0 +1,127 @@
+/*****CRIANDO TABELAS*****/
+/*Biblioteca*/
+CREATE TABLE biblioteca (
+    id INT AUTO_INCREMENT NOT NULL,
+    nome VARCHAR(45) NOT NULL,
+    endereco VARCHAR(45) NOT NULL,
+    
+    CONSTRAINT pk_id PRIMARY KEY (id)
+);
+
+/*Livro*/
+CREATE TABLE livro (
+    isbn VARCHAR(13) NOT NULL,
+    nome VARCHAR(45) NOT NULL,
+    autor VARCHAR(45) NOT NULL,
+    editora VARCHAR(45) NOT NULL,
+    tema VARCHAR(45) NOT NULL,
+    
+    CONSTRAINT pk_isbn PRIMARY KEY (isbn)
+);
+
+/*Usuario*/
+CREATE TABLE usuario (
+    id INT AUTO_INCREMENT NOT NULL,
+    nome VARCHAR(45) NOT NULL,
+    email VARCHAR(45) NOT NULL,
+    curso VARCHAR(45),
+    
+    CONSTRAINT pk_id PRIMARY KEY (id)
+);
+
+/*Exemplar*/
+CREATE TABLE exemplar (
+    id INT AUTO_INCREMENT NOT NULL,
+    num_paginas INT NOT NULL,
+    edicao INT NOT NULL,
+    ano YEAR NOT NULL,
+    isbn VARCHAR(13) NOT NULL,
+    id_biblioteca INT NOT NULL,
+    
+    CONSTRAINT pk_id PRIMARY KEY (id),
+    CONSTRAINT fk_isbn FOREIGN KEY (isbn) REFERENCES livro (isbn),
+    CONSTRAINT fk_id_biblioteca FOREIGN KEY (id_biblioteca) REFERENCES biblioteca (id)
+);
+
+/*Emprestimo*/
+CREATE TABLE emprestimo (
+    id INT AUTO_INCREMENT NOT NULL,
+    data_emprestimo DATE NOT NULL,
+    data_devolucao DATE NOT NULL,
+    id_exemplar INT NOT NULL,
+    id_usuario INT NOT NULL,
+    id_biblioteca INT NOT NULL,
+    
+    CONSTRAINT pk_id PRIMARY KEY (id),
+    CONSTRAINT fk_id_exemplar FOREIGN KEY (id_exemplar) REFERENCES exemplar(id),
+    CONSTRAINT fk_id_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    CONSTRAINT fk_id_biblioteca_emprestimo FOREIGN KEY (id_biblioteca) REFERENCES biblioteca(id)
+);
+
+
+/*****INSERINDO REGISTROS*****/
+/*Biblioteca*/
+INSERT INTO biblioteca (`nome`, `endereco`) VALUES ("Livros Mágicos", "Rua Mágica, 407");
+INSERT INTO biblioteca (`nome`, `endereco`) VALUES ("Poeira das Letras", "Rua Empoeirada, 704");
+INSERT INTO biblioteca (`nome`, `endereco`) VALUES ("Magioteca", "Rua dos Astecas, 564");
+INSERT INTO biblioteca (`nome`, `endereco`) VALUES ("Cebo Ceboso", "Avenida Cebosa, 65");
+
+/*Livro*/
+INSERT INTO `livro`(`isbn`, `nome`, `autor`, `editora`, `tema`) VALUES ("4312354365432", "Harry Potter", "Paulo Coelho", "Editoria dos Campos", "Magia Negra");
+INSERT INTO `livro`(`isbn`, `nome`, `autor`, `editora`, `tema`) VALUES ("6542347654364", "O Mundo de Jemaf", "Jemaf", "Livro Livroso", "Autobiografia");
+INSERT INTO `livro`(`isbn`, `nome`, `autor`, `editora`, `tema`) VALUES ("3423413453545", "Meu Pé de Jaca", "Maurício de Souza", "Turma da Mônica LTDA", "Suspense");
+
+/*Usuario*/
+INSERT INTO `usuario`(`nome`, `email`, `curso`) VALUES ("Gregg Brown", "stehr.cloyd@gmail.com", "Informatica");
+INSERT INTO `usuario`(`nome`, `email`, `curso`) VALUES ("Lisandro Boehm IV", "balistreri.verna@yahoo.com", "Patola");
+INSERT INTO `usuario`(`nome`, `email`, `curso`) VALUES ("Treva Wisozk", "dave.labadie@kuphal.info", "Quimica");
+INSERT INTO `usuario`(`nome`, `email`, `curso`) VALUES ("Dr. Ursula Kemmer DVM", "feeney.marcelo@grant.com", "Automacao");
+INSERT INTO `usuario`(`nome`, `email`, `curso`) VALUES ("Clemens Crooks PhD", "bednar.patience@hotmail.com", "Eletras");
+INSERT INTO `usuario`(`nome`, `email`, `curso`) VALUES ("Nella Auer", "mekhi34@gmail.com", "Info");                                                                                                                                                               
+INSERT INTO `usuario`(`nome`, `email`, `curso`) VALUES ("Stacy Hyatt", "delpha.smith@gmail.com", "Engenharia");
+INSERT INTO `usuario`(`nome`, `email`, `curso`) VALUES ("Braxton Heaney", "keyon71@kub.biz", "Patola");
+INSERT INTO `usuario`(`nome`, `email`, `curso`) VALUES ("Kaylie Kautzer", "enos42@gmail.com", "Quimica");
+INSERT INTO `usuario`(`nome`, `email`, `curso`) VALUES ("Ike Wehner", "vmorissette@gmail.com", "Letras");
+
+/*Exemplar*/
+INSERT INTO `exemplar`(`num_paginas`, `edicao`, `ano`, `isbn`, `id_biblioteca`) VALUES (132, 12, "1970", "4312354365432", 1);
+INSERT INTO `exemplar`(`num_paginas`, `edicao`, `ano`, `isbn`, `id_biblioteca`) VALUES (321, 21, "2010", "6542347654364", 1);
+INSERT INTO `exemplar`(`num_paginas`, `edicao`, `ano`, `isbn`, `id_biblioteca`) VALUES (412, 45, "2017", "3423413453545", 3);
+INSERT INTO `exemplar`(`num_paginas`, `edicao`, `ano`, `isbn`, `id_biblioteca`) VALUES (65, 65, "1965", "6542347654364", 2);
+INSERT INTO `exemplar`(`num_paginas`, `edicao`, `ano`, `isbn`, `id_biblioteca`) VALUES (32, 23, "1923", "3423413453545", 2);
+INSERT INTO `exemplar`(`num_paginas`, `edicao`, `ano`, `isbn`, `id_biblioteca`) VALUES (6432, 120, "1234", "3423413453545", 3);
+INSERT INTO `exemplar`(`num_paginas`, `edicao`, `ano`, `isbn`, `id_biblioteca`) VALUES (43, 42, "1942", "4312354365432", 1);
+INSERT INTO `exemplar`(`num_paginas`, `edicao`, `ano`, `isbn`, `id_biblioteca`) VALUES (21, 21, "1921", "3423413453545", 2);
+INSERT INTO `exemplar`(`num_paginas`, `edicao`, `ano`, `isbn`, `id_biblioteca`) VALUES (143, 32, "2014", "6542347654364", 3);
+INSERT INTO `exemplar`(`num_paginas`, `edicao`, `ano`, `isbn`, `id_biblioteca`) VALUES (32, 2, "2017", "6542347654364", 1);
+
+/*Emprestimos*/
+INSERT INTO `emprestimo`(`data_emprestimo`, `data_devolucao`, `id_exemplar`, `id_usuario`, `id_biblioteca`) VALUES ("2017-08-21", "2017-09-01", 1, 1, 1);
+INSERT INTO `emprestimo`(`data_emprestimo`, `data_devolucao`, `id_exemplar`, `id_usuario`, `id_biblioteca`) VALUES ("2017-06-21", "2017-07-01", 2, 2, 2);
+INSERT INTO `emprestimo`(`data_emprestimo`, `data_devolucao`, `id_exemplar`, `id_usuario`, `id_biblioteca`) VALUES ("2017-07-21", "2017-08-01", 3, 3, 3);
+INSERT INTO `emprestimo`(`data_emprestimo`, `data_devolucao`, `id_exemplar`, `id_usuario`, `id_biblioteca`) VALUES ("2017-02-21", "2017-03-01", 4, 4, 1);
+INSERT INTO `emprestimo`(`data_emprestimo`, `data_devolucao`, `id_exemplar`, `id_usuario`, `id_biblioteca`) VALUES ("2017-01-21", "2017-02-01", 5, 5, 2);
+INSERT INTO `emprestimo`(`data_emprestimo`, `data_devolucao`, `id_exemplar`, `id_usuario`, `id_biblioteca`) VALUES ("2017-03-21", "2017-04-01", 6, 6, 3);
+INSERT INTO `emprestimo`(`data_emprestimo`, `data_devolucao`, `id_exemplar`, `id_usuario`, `id_biblioteca`) VALUES ("2017-04-21", "2017-05-01", 7, 7, 1);
+INSERT INTO `emprestimo`(`data_emprestimo`, `data_devolucao`, `id_exemplar`, `id_usuario`, `id_biblioteca`) VALUES ("2017-08-21", "2017-09-01", 8, 8, 2);
+
+
+/*****CONSULTAS*****/
+/*1*/
+SELECT nome FROM biblioteca;
+/*2*/
+SELECT nome FROM usuario WHERE curso = "informatica" OR curso = "info";
+/*3*/
+SELECT nome, autor FROM livro WHERE tema = "computacao";
+/*4*/
+SELECT * FROM exemplar WHERE ano > "2010";
+/*5*/
+SELECT exemplar.id, exemplar.isbn FROM exemplar JOIN biblioteca ON exemplar.id_biblioteca = biblioteca.id WHERE biblioteca.nome = "Central";
+/*6*/
+SELECT emprestimo.*, usuario.nome FROM emprestimo JOIN usuario ON emprestimo.id_usuario = usuario.id WHERE usuario.nome LIKE "João%";
+/*7*/
+SELECT emprestimo.*, usuario.nome, biblioteca.nome FROM emprestimo JOIN usuario ON emprestimo.id_usuario = usuario.id JOIN biblioteca ON emprestimo.id_biblioteca = biblioteca.id WHERE usuario.nome LIKE "João%" AND biblioteca.nome = "Central";
+/*8*/
+SELECT DISTINCT livro.nome FROM emprestimo JOIN exemplar ON emprestimo.id_exemplar = exemplar.id JOIN livro ON exemplar.isbn = livro.isbn;
+/*9*/
+SELECT DISTINCT biblioteca.nome FROM emprestimo JOIN exemplar ON emprestimo.id_exemplar = exemplar.id JOIN biblioteca ON exemplar.id_biblioteca = biblioteca.id;
