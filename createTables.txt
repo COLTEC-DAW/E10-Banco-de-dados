@@ -1,0 +1,45 @@
+CREATE TABLE usuarios (
+  	usuarioId INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	nome VARCHAR(255),
+	curso VARCHAR(255),
+	email VARCHAR(255) UNIQUE
+);
+
+CREATE TABLE bibliotecas (
+  	bibliotecaId INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	nome VARCHAR(255),
+	endereco VARCHAR(255)
+);
+
+CREATE TABLE livros (
+  	livroId INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  	nome VARCHAR(255),
+  	autor VARCHAR(255),
+  	editora VARCHAR(255),
+  	ISBN VARCHAR(255),
+  	tema VARCHAR(255)
+);
+
+CREATE TABLE exemplares (
+  	exemplarId INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  	edicao VARCHAR(255),
+  	ano VARCHAR(255),
+  	paginas VARCHAR(255),
+  	livroId int (10) UNSIGNED,
+  	FOREIGN KEY (livroId) REFERENCES livros(livroId),
+  	bibliotecaId int (10) UNSIGNED,
+  	FOREIGN KEY (bibliotecaId) REFERENCES bibliotecas(bibliotecaId)	
+);
+
+CREATE TABLE emprestimos (
+  	emprestimoId INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  	dataEmprestimo DATE,
+  	dataDevolucao DATE,
+
+	exemplarId int (10)UNSIGNED,
+	usuarioId int (10)UNSIGNED,
+	bibliotecaId int (10)UNSIGNED,
+  	FOREIGN KEY (exemplarId) REFERENCES exemplares(exemplarId),
+  	FOREIGN KEY (usuarioId) REFERENCES usuarios(usuarioId),
+  	FOREIGN KEY (bibliotecaId) REFERENCES bibliotecas(bibliotecaId)  	
+);
