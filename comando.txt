@@ -24,8 +24,10 @@ CREATE TABLE LIVRO (
 
 CREATE TABLE EXEMPLARES (
 	id_exemplar INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-	id_livro INT(6) NOT NULL,
-	id_biblioteca INT(6) NOT NULL,
+	id_livro INT(6) UNSIGNED,
+  	FOREIGN KEY (id_livro) REFERENCES LIVRO(id_livro),
+	id_biblioteca INT(6) UNSIGNED,
+  	FOREIGN KEY (id_biblioteca) REFERENCES BIBLIOTECAS(id_biblioteca),
 	edicao INT(6) NOT NULL,
 	ano INT(6) NOT NULL,
 	paginas INT(6) NOT NULL
@@ -33,11 +35,14 @@ CREATE TABLE EXEMPLARES (
 
 CREATE TABLE EMPRESTIMO (
 	id_emprestimo INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-	id_exemplar INT(6) NOT NULL,
-	id_user INT(6) NOT NULL,
+	id_exemplar INT(6) UNSIGNED,
+  	FOREIGN KEY (id_exemplar) REFERENCES EXEMPLARES(id_exemplar),
+	id_user INT(6) UNSIGNED,
+  	FOREIGN KEY (id_user) REFERENCES USERS(id_user),
 	data VARCHAR(30) NOT NULL,
 	devolucao VARCHAR(30) NOT NULL,
-	id_biblioteca INT(6) NOT NULL
+	id_biblioteca INT(6) UNSIGNED,
+  	FOREIGN KEY (id_biblioteca) REFERENCES BIBLIOTECAS(id_biblioteca)  	
 );
 
 //Inserindo conteudo nas tabelas:
@@ -80,7 +85,7 @@ INSERT INTO EXEMPLARES VALUES
 INSERT INTO EMPRESTIMO VALUES 
 (DEFAULT, 1, 1, "4", "7", 1),
 (DEFAULT, 1, 2, "4", "6", 1),
-(DEFAULT, 2, 6, "4", "6", 4),
+(DEFAULT, 2, 6, "4", "6", 1),
 (DEFAULT, 2, 4, "2", "4", 1),
 (DEFAULT, 3, 4, "2", "4", 3),
 (DEFAULT, 2, 10, "2", "4", 4),
@@ -97,7 +102,7 @@ INSERT INTO EMPRESTIMO VALUES
    WHERE exemplares.id_biblioteca = bibliotecas.id_biblioteca AND bibliotecas.nome LIKE '%central%';
 6) SELECT emprestimo.*, users.* FROM emprestimo, users
    WHERE emprestimo.id_user = users.id_user AND users.nome LIKE '%joão%';
-7) SELECT users.*, emprestimo.* FROM users, emprestimo
-   WHERE users.id_user = emprestimo.id_user AND users.nome LIKE '%joão%' AND emprestimo.id_biblioteca = 1;
+7) SELECT users.*, emprestimo.*, bibliotecas.* FROM users, emprestimo, bibliotecas
+   WHERE users.id_user = emprestimo.id_user AND users.nome LIKE '%joão%' AND emprestimo.id_biblioteca = bibliotecas.id_biblioteca AND bibliotecas.nome LIKE '%central%';
 8) SELECT DISTINCT id_exemplar FROM emprestimo;
 9) SELECT DISTINCT id_biblioteca FROM emprestimo;
