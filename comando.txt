@@ -1,0 +1,108 @@
+//Criando Tabelas:
+
+CREATE TABLE BIBLIOTECAS (
+	id_biblioteca INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	nome VARCHAR(30) NOT NULL,
+	endereco VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE USERS (
+	id_user INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	nome VARCHAR(30) NOT NULL,
+	email VARCHAR(30) NOT NULL,
+	curso VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE LIVRO (
+	id_livro INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	nome VARCHAR(30) NOT NULL,
+	autor VARCHAR(30) NOT NULL,
+	editora VARCHAR(30) NOT NULL,
+	isbn VARCHAR(30) NOT NULL,
+	tema VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE EXEMPLARES (
+	id_exemplar INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	id_livro INT(6) UNSIGNED,
+  	FOREIGN KEY (id_livro) REFERENCES LIVRO(id_livro),
+	id_biblioteca INT(6) UNSIGNED,
+  	FOREIGN KEY (id_biblioteca) REFERENCES BIBLIOTECAS(id_biblioteca),
+	edicao INT(6) NOT NULL,
+	ano INT(6) NOT NULL,
+	paginas INT(6) NOT NULL
+);
+
+CREATE TABLE EMPRESTIMO (
+	id_emprestimo INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	id_exemplar INT(6) UNSIGNED,
+  	FOREIGN KEY (id_exemplar) REFERENCES EXEMPLARES(id_exemplar),
+	id_user INT(6) UNSIGNED,
+  	FOREIGN KEY (id_user) REFERENCES USERS(id_user),
+	data VARCHAR(30) NOT NULL,
+	devolucao VARCHAR(30) NOT NULL,
+	id_biblioteca INT(6) UNSIGNED,
+  	FOREIGN KEY (id_biblioteca) REFERENCES BIBLIOTECAS(id_biblioteca)  	
+);
+
+//Inserindo conteudo nas tabelas:
+
+INSERT INTO BIBLIOTECAS VALUES 
+(DEFAULT,"central", "centro"),
+(DEFAULT,"publica", "betim"),
+(DEFAULT,"estadual", "contagem"),
+(DEFAULT,"municipal", "pampulha");
+
+INSERT INTO USERS VALUES 
+(DEFAULT,"lucas", "1@1.com", "musica"),
+(DEFAULT,"raul", "2@2.com", "eletronica"),
+(DEFAULT,"arthur", "3@3.com", "fisica"),
+(DEFAULT,"gustavo", "4@4.com", "info"),
+(DEFAULT,"carol", "5@5.com", "psicologia"),
+(DEFAULT,"joão", "6@6.com", "info"),
+(DEFAULT,"paulo", "7@7.com", "producao"),
+(DEFAULT,"ping", "8@8.com", "info"),
+(DEFAULT,"ananda", "9@9.com", "biologia"),
+(DEFAULT,"clarisse", "10@10.com", "info");	
+
+INSERT INTO LIVRO VALUES 
+(DEFAULT,"Jogador", "Machado de Assis", "Ática", "123", "aventura"),
+(DEFAULT,"Panico", "Montero", "ADS", "321", "computação"),
+(DEFAULT,"Meme", "Paulo", "Arqueiro", "132", "drama");
+
+INSERT INTO EXEMPLARES VALUES 
+(DEFAULT, 1, 1, 4, 1999, 200),
+(DEFAULT, 1, 2, 4, 1999, 200),
+(DEFAULT, 2, 3, 4, 1999, 200),
+(DEFAULT, 2, 4, 4, 1999, 200),
+(DEFAULT, 3, 1, 4, 1999, 200),
+(DEFAULT, 3, 3, 4, 1999, 200),
+(DEFAULT, 1, 4, 4, 1999, 200),
+(DEFAULT, 1, 3, 4, 1999, 200),
+(DEFAULT, 2, 3, 4, 1999, 200),
+(DEFAULT, 2, 2, 4, 2011, 200);
+
+INSERT INTO EMPRESTIMO VALUES 
+(DEFAULT, 1, 1, "4", "7", 1),
+(DEFAULT, 1, 2, "4", "6", 1),
+(DEFAULT, 2, 6, "4", "6", 1),
+(DEFAULT, 2, 4, "2", "4", 1),
+(DEFAULT, 3, 4, "2", "4", 3),
+(DEFAULT, 2, 10, "2", "4", 4),
+(DEFAULT, 6, 8, "2", "4", 3),
+(DEFAULT, 1, 5, "2", "4", 2);
+
+//Comandos de busca:
+
+1) SELECT nome FROM `bibliotecas`;
+2) SELECT nome FROM `users` WHERE users.curso = 'info';
+3) SELECT nome, autor FROM `livro` WHERE livro.tema = 'computação';
+4) SELECT * FROM `exemplares` WHERE exemplares.ano > 2010;
+5) SELECT exemplares.*, bibliotecas.* FROM exemplares, bibliotecas
+   WHERE exemplares.id_biblioteca = bibliotecas.id_biblioteca AND bibliotecas.nome LIKE '%central%';
+6) SELECT emprestimo.*, users.* FROM emprestimo, users
+   WHERE emprestimo.id_user = users.id_user AND users.nome LIKE '%joão%';
+7) SELECT users.*, emprestimo.*, bibliotecas.* FROM users, emprestimo, bibliotecas
+   WHERE users.id_user = emprestimo.id_user AND users.nome LIKE '%joão%' AND emprestimo.id_biblioteca = bibliotecas.id_biblioteca AND bibliotecas.nome LIKE '%central%';
+8) SELECT DISTINCT id_exemplar FROM emprestimo;
+9) SELECT DISTINCT id_biblioteca FROM emprestimo;
