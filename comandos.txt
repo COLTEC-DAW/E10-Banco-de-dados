@@ -1,0 +1,18 @@
+#1
+	SELECT nome FROM bibliotecas;
+#2
+	SELECT nome FROM usuarios WHERE curso="informática";
+#3
+	SELECT nome,autor FROM livros WHERE tema="computação";
+#4
+ 	SELECT * FROM exemplares WHERE ano > 2010;
+#5
+	SELECT * FROM exemplares, bibliotecas WHERE exemplares.bibliotecaId = bibliotecas.bibliotecaId AND bibliotecas.nome LIKE '%Biblioteca Central da UFMG%';
+#6
+	SELECT * FROM emprestimos, usuarios WHERE usuarios.usuarioId = emprestimos.usuarioId AND usuarios.nome LIKE '%joão%';
+#7
+	SELECT * FROM emprestimos, usuarios, bibliotecas WHERE usuarios.usuarioId = emprestimos.usuarioId AND usuarios.nome LIKE '%joão%' AND emprestimos.bibliotecaId = bibliotecas.bibliotecaId AND bibliotecas.nome LIKE '%Biblioteca Central da UFMG%';
+#8
+	SELECT DISTINCT exemplarId FROM emprestimos;
+#9
+	SELECT DISTINCT bibliotecaId FROM emprestimos;
