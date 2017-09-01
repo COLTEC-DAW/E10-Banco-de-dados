@@ -1,0 +1,90 @@
+USE sistema;
+
+CREATE TABLE bibliotecas
+(nome varchar(60),
+endereço varchar(256));
+
+ALTER TABLE bibliotecas
+ADD id INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+
+CREATE TABLE livros
+(nome varchar(60),
+autor varchar(60),
+editora varchar(60),
+ISBN varchar(60),
+tema varchar(60));
+
+ALTER TABLE livros
+ADD id INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+
+CREATE TABLE usuarios
+(nome varchar(60),
+email varchar(60),
+curso varchar(60));
+
+ALTER TABLE usuarios
+ADD id INT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+
+CREATE TABLE exemplares
+(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+num_paginas INT NOT NULL,
+livroID INT NOT NULL,
+edicao INT NOT NULL,
+ano YEAR NOT NULL,
+isbn VARCHAR(13) NOT NULL,
+bibliotecaID INT NOT NULL,
+CONSTRAINT fk_exemplar_livro FOREIGN KEY (livroID) REFERENCES livros(id),
+CONSTRAINT fk_exemplar_biblioteca FOREIGN KEY (bibliotecaID) REFERENCES bibliotecas(id));
+
+CREATE TABLE emprestimos
+(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+exemplarID INT NOT NULL,
+usuarioID INT NOT NULL,
+bibliotecaID INT NOT NULL,
+data_emprestimo DATE NOT NULL,
+data_devolucao DATE NOT NULL,
+
+CONSTRAINT fk_emprestimo_exemplar FOREIGN KEY (exemplarID) REFERENCES exemplares(id),
+CONSTRAINT fk_emprestimo_usuario FOREIGN KEY (usuarioID) REFERENCES usuarios(id),
+CONSTRAINT fk_emprestimo_biblioteca FOREIGN KEY (bibliotecaID) REFERENCES bibliotecas(id));
+
+CREATE TABLE livros_exemplares
+(livroID INT NOT NULL,
+ exemplarID INT NOT NULL,
+ 
+CONSTRAINT fk_exemplar_exemplar FOREIGN KEY (exemplarID) REFERENCES exemplares(id),
+CONSTRAINT fk_livro_livro FOREIGN KEY (livroID) REFERENCES livros(id)
+);
+
+CREATE TABLE exemplares_emprestimos
+(exemplarID INT NOT NULL,
+emprestimoID INT NOT NULL,
+ 
+CONSTRAINT fk_exemplares_exemplares FOREIGN KEY (exemplarID) REFERENCES exemplares(id),
+CONSTRAINT fk_emprestimos_emprestimos FOREIGN KEY (emprestimoID) REFERENCES emprestimos(id));
+
+CREATE TABLE usuarios_emprestimos
+(usuarioID INT NOT NULL,
+emprestimoID INT NOT NULL,
+ 
+CONSTRAINT fk_usuarios_usuarios FOREIGN KEY (usuarioID) REFERENCES usuarios(id),
+CONSTRAINT fk_emprestimos_emprestimos FOREIGN KEY (emprestimoID) REFERENCES emprestimos(id));
+
+//esqueci de copiar o codigo de inserir bibriotecas
+
+INSERT INTO `usuarios` (`nome`, `email`, `curso`, `id`) VALUES ('Alfonso', 'carol@carol.com', 'informatica', NULL);
+INSERT INTO `usuarios` (`nome`, `email`, `curso`, `id`) VALUES ('Morberto', 'fred@carol.com', 'eletronica', NULL);
+INSERT INTO `usuarios` (`nome`, `email`, `curso`, `id`) VALUES ('Vitor', 'carol@casdl.com', 'analises', NULL);
+INSERT INTO `usuarios` (`nome`, `email`, `curso`, `id`) VALUES ('Alfrederson', 'carasdl@carol.com', 'patola', NULL);
+INSERT INTO `usuarios` (`nome`, `email`, `curso`, `id`) VALUES ('Josney', 'carol@cardfc.com', 'civil', NULL);
+INSERT INTO `usuarios` (`nome`, `email`, `curso`, `id`) VALUES ('Afonso', 'caaol@casdl.com', 'computeering', NULL);
+INSERT INTO `usuarios` (`nome`, `email`, `curso`, `id`) VALUES ('Marina Miranda', 'cazzol@carol.com', 'biologia', NULL);
+INSERT INTO `usuarios` (`nome`, `email`, `curso`, `id`) VALUES ('Paulo Nogueira', 'carccl@cgol.com', 'musica', NULL);
+INSERT INTO `usuarios` (`nome`, `email`, `curso`, `id`) VALUES ('Carolina Tecchio', 'cadol@sdol.com', 'alfandega', NULL);
+
+INSERT INTO `livros` (`nome`, `autor`, `editora`, `ISBN`, `tema`, `id`) VALUES ('As aventuras de Narnia', 'CS Cristopher', 'Minas', 'AAKSDNMKsdsa', 'Romance Autoral', NULL)
+INSERT INTO `livros` (`nome`, `autor`, `editora`, `ISBN`, `tema`, `id`) VALUES ('My little pony', 'Carolina Miranda', 'Pinóquio', 'AAKSDNMKASdfD', 'Acao', NULL)
+INSERT INTO `livros` (`nome`, `autor`, `editora`, `ISBN`, `tema`, `id`) VALUES ('As aventuras de Marcio Lacerda', 'Carolina Rocha', 'Pedersali', 'AAKSDNMKASD', 'Romance', NULL);
+
+
+SELECT * FROM Emprestimos, Usuario WHERE emprestimo.usuario(id)=usuario.(id) AND usuario.nome LIKE '%Joao%';
