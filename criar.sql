@@ -1,0 +1,30 @@
+CREATE DATABASE DB;
+use DB;
+
+CREATE TABLE Usuario(id INT PRIMARY KEY NOT NULL,Nome TEXT NOT NULL, Curso TEXT NOT NULL,Email TEXT NOT NULL);
+
+CREATE TABLE Livro(id INT PRIMARY KEY NOT NULL,Nome TEXT NOT NULL,Editora TEXT NOT NULL,Tema TEXT NOT NULL,Autor TEXT NOT NULL,ISBN INT NOT NULL);
+
+CREATE TABLE Bibliotecas(id INT PRIMARY KEY NOT NULL, Nome TEXT NOT NULL,Curso TEXT,Endereco TEXT);
+
+
+CREATE TABLE Exemplar(
+    id INT PRIMARY KEY NOT NULL,
+    Edicao TEXT NOT NULL,
+    Ano_publicacao INT NOT NULL,
+    N_paginas INT NOT NULL,
+    CONSTRAINT idUsuario FOREIGN KEY (Usuario_id) REFERENCES Usuario(id),
+    CONSTRAINT idLivro FOREIGN KEY (Livro) REFERENCES Livro(id),
+    CONSTRAINT idBiblioteca FOREIGN KEY (Biblioteca) REFERENCES Biblioteca(id)
+);
+
+
+
+CREATE TABLE Emprestimo(
+  id INT PRIMARY KEY NOT NULL,
+  DataEmprestimo Date NOT NULL,
+  DataDevolucao  Date NOT NULL,
+  CONSTRAINT idUsuario FOREIGN KEY (Usuario_id) REFERENCES Usuario(id),
+  CONSTRAINT idLivro FOREIGN KEY (Livro) REFERENCES Livro(id),
+  CONSTRAINT idExemplar FOREIGN KEY (Exemplar) REFERENCES Exemplar(id)
+);
