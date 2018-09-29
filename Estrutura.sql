@@ -4,7 +4,7 @@ USE SistemaBibliotecario;
 
 CREATE TABLE bibliotecas (
 	nome VARCHAR(40),
-    endereço VARCHAR(80),
+    endereco VARCHAR(80),
     id INT NOT NULL,
     
     CONSTRAINT id_biblioteca PRIMARY KEY (id));
@@ -37,23 +37,33 @@ CREATE TABLE exemplares (
     CONSTRAINT id_exemplar PRIMARY KEY (id),
     
     CONSTRAINT fk_id_livro FOREIGN KEY (id_livro)
-    REFERENCES livros(isbn),
+    REFERENCES livros(isbn)
+    ON UPDATE CASCADE,
     
     CONSTRAINT fk_id_biblioteca FOREIGN KEY (id_biblioteca)
-    REFERENCES bibliotecas(id));
+    REFERENCES bibliotecas(id)
+    ON UPDATE CASCADE);
     
 CREATE TABLE emprestimos (
 	id_exemplar INT NOT NULL,
     id_usuario INT NOT NULL, 
     id_biblioteca INT NOT NULL,
+    id INT AUTO_INCREMENT,
     data_emprestimo DATE,
     data_devolucao DATE,
     
+    CONSTRAINT id_emprestimo PRIMARY KEY (id),
+    
     CONSTRAINT fk_id_exemplar FOREIGN KEY (id_exemplar)
-    REFERENCES exemplares(id),
+    REFERENCES exemplares(id)
+    ON UPDATE CASCADE,
     
     CONSTRAINT fk_id_usuario FOREIGN KEY (id_usuario)
-    REFERENCES usuarios(id),
+    REFERENCES usuarios(id)
+    ON UPDATE CASCADE,
     
     CONSTRAINT fk_id_biblioteca1 FOREIGN KEY (id_biblioteca)
-    REFERENCES bibliotecas(id));
+    REFERENCES bibliotecas(id)
+    ON UPDATE CASCADE);
+    
+    
