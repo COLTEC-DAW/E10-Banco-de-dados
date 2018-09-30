@@ -65,5 +65,3 @@ CREATE TABLE emprestimos (
     CONSTRAINT fk_id_biblioteca1 FOREIGN KEY (id_biblioteca)
     REFERENCES bibliotecas(id)
     ON UPDATE CASCADE);
-    
-    
