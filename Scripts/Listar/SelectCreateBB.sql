@@ -1,0 +1,1 @@
+SELECT * FROM conta WHERE Agência_Id = 'b7386a7d-604c-41f5-b2a3-ea4d9671cefa';
