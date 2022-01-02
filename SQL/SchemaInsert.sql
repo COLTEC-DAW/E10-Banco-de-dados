@@ -1,0 +1,27 @@
+-- Criação das contas
+INSERT INTO cliente(Cpf,Nome,Endereco,Telephone,Data_nascimento) VALUES('3123123131','Henrique',  'Contagem', '33333333','2003-09-25');
+INSERT INTO cliente(Cpf,Nome,Endereco,Telephone,Data_nascimento) VALUES('4234234234','João', 'Belo Horizonte', '33333333','2003-09-25');
+INSERT INTO cliente(Cpf,Nome,Endereco,Telephone,Data_nascimento) VALUES('2342342343','Pedro', 'Belo Horizonte', '33333333','2003-09-25');
+INSERT INTO cliente(Cpf,Nome,Endereco,Telephone,Data_nascimento) VALUES('5454234321','Giovanna','Contagem', '33333333','2003-09-25');
+INSERT INTO agencia(Codigo,Nome,Endereco,Data_criacao) VALUES(45,'Central', 'Belo Horizonte','2015-09-09');
+INSERT INTO agencia(Codigo,Nome,Endereco,Data_criacao) VALUES(22,'Itau', 'Belo Horizonte','2015-09-09');
+INSERT INTO agencia(Codigo,Nome,Endereco,Data_criacao) VALUES(4,'Santander','Belo Horizonte','2015-09-09');
+INSERT INTO agencia(Codigo,Nome,Endereco,Data_criacao) VALUES(11,'Bradesco', 'Belo Horizonte','2020-09-01');
+INSERT INTO conta(Saldo,Tipo,Cliente_Dono,Agencia_Adm) VALUES(9000, 'Corrente','3123123131',45);
+INSERT INTO conta(Saldo,Tipo,Cliente_Dono,Agencia_Adm) VALUES(20000, 'Poupança','3123123131',45);
+INSERT INTO conta(Saldo,Tipo,Cliente_Dono,Agencia_Adm) VALUES(3000, 'Poupança','4234234234',4);
+INSERT INTO conta(Saldo,Tipo,Cliente_Dono,Agencia_Adm) VALUES(30000, 'Poupança','4234234234',22);
+INSERT INTO conta(Saldo,Tipo,Cliente_Dono,Agencia_Adm) VALUES(24000, 'Poupança','4234234234',11);
+INSERT INTO conta(Saldo,Tipo,Cliente_Dono,Agencia_Adm) VALUES(20000,'Corrente','4234234234',4);
+INSERT INTO conta(Saldo,Tipo,Cliente_Dono,Agencia_Adm) VALUES(90000,'Poupança','2342342343',11);
+INSERT INTO conta(Saldo,Tipo,Cliente_Dono,Agencia_Adm) VALUES(22000,'Corrente','2342342343',45);
+INSERT INTO conta(Saldo,Tipo,Cliente_Dono,Agencia_Adm) VALUES(30000,'Corrente','5454234321',22);
+INSERT INTO conta(Saldo,Tipo,Cliente_Dono,Agencia_Adm) VALUES(5000, 'Corrente','5454234321',22);
+INSERT INTO transacao(Valor,Tipo,Conta_origem,Conta_destino) VALUES(500, 'Saque',3, NULL);
+INSERT INTO transacao(Valor,Tipo,Conta_origem,Conta_destino) VALUES(100, 'Deposito', 2, 2);
+INSERT INTO transacao(Valor,Tipo,Conta_origem,Conta_destino) VALUES(600, 'Saque',3, NULL);
+INSERT INTO transacao(Valor,Tipo,Conta_origem,Conta_destino) VALUES(200, 'Deposito', 1, 6);
+INSERT INTO transacao(Valor,Tipo,Conta_origem,Conta_destino) VALUES(20000, 'Saque',7, NULL);
+INSERT INTO transacao(Valor,Tipo,Conta_origem,Conta_destino) VALUES(3000, 'Deposito', 8, 9);
+INSERT INTO transacao(Valor,Tipo,Conta_origem,Conta_destino) VALUES(2300, 'Saque', 5, NULL);
+INSERT INTO transacao(Valor,Tipo,Conta_origem,Conta_destino) VALUES(1100, 'Deposito', 3, 2);
