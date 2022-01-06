@@ -1,6 +1,3 @@
-
-DROP DATABASE sistemaBancario; #REMOVER LINHA!!!
-
 CREATE DATABASE sistemaBancario;
 
 USE sistemaBancario;
