@@ -1,0 +1,37 @@
+USE daw03;
+
+SELECT nome FROM clientes;
+
+SELECT nome, data_criacao FROM agencias
+WHERE data_criacao > "1000-12-31";
+
+SELECT * FROM contas WHERE tipo = "poupanca";
+
+SELECT * FROM contas WHERE agencia = '1';
+
+SELECT transacao.id, transacao.valor, transacao.tipo, transacao.contas_numero_origem, 
+transacao.contas_numero_destino, contas.dono 
+FROM transacao, contas 
+WHERE transacao.contas_numero_origem = '111' 
+AND contas.dono = 'Joao';
+
+SELECT * FROM transacao 
+WHERE contas_numero_origem = '111' 
+AND contas_numero_destino = '222';
+
+SELECT agencias.nome, COUNT(contas.numero) quantidade_contas FROM agencias
+JOIN contas ON contas.numero = agencias.codigo
+GROUP BY agencias.nome
+HAVING COUNT(contas.numero) >= 3;
+
+SELECT contas.numero, clientes.nome nome_cliente, COUNT(transacao.id) quantidade_transacoes FROM contas
+JOIN transacao ON transacao.contas_numero_origem = contas.numero
+JOIN clientes ON clientes.nome = contas.dono
+GROUP BY contas.numero
+HAVING COUNT(transacao.id) >= 4;
+
+SELECT clientes.nome, COUNT(transacao.id) quantidade_transacoes FROM clientes
+JOIN contas ON contas.dono = clientes.nome
+LEFT JOIN transacao ON transacao.contas_numero_origem = contas.numero
+GROUP BY clientes.nome
+HAVING COUNT(transacao.id) = 0;

@@ -1,0 +1,52 @@
+CREATE DATABASE daw03;
+USE daw03;
+
+CREATE TABLE clientes (
+        cpf INT,
+    nome VARCHAR(100) NOT NULL,
+    endereco VARCHAR(200),
+    telefone VARCHAR(15),
+    data_nascimento DATE,
+	CONSTRAINT clientes_pk PRIMARY KEY(cpf)
+
+);
+
+CREATE TABLE agencias (
+
+	    codigo INT,
+    nome VARCHAR(45) NOT NULL,
+    endereco VARCHAR(200) NOT NULL,
+    data_criacao DATETIME NOT NULL,
+    CONSTRAINT agencias_pk PRIMARY KEY (codigo)
+
+);
+
+CREATE TABLE contas (
+
+	    numero INT, 
+    agencia INT,
+    saldo DECIMAL(10,2) NOT NULL,
+    tipo VARCHAR(45) NOT NULL,
+    clientes_cpf INT,
+    dono VARCHAR(45) NOT NULL,
+    CONSTRAINT contas_pk PRIMARY KEY (numero),
+    CONSTRAINT contas_agencias_fk FOREIGN KEY (agencia) 
+                REFERENCES agencias(codigo),
+    CONSTRAINT contas_clientes_fk FOREIGN KEY (clientes_cpf) 
+                REFERENCES clientes(cpf)
+
+);
+
+CREATE TABLE transacao (
+	    id INT,
+    contas_numero_origem INT NOT NULL,
+    contas_numero_destino INT NOT NULL,
+    valor DOUBLE NOT NULL,
+    tipo ENUM('dep', 'saque') NOT NULL,
+    
+    CONSTRAINT transacao_origem_fk FOREIGN KEY(contas_numero_origem)
+		REFERENCES contas(numero),
+	CONSTRAINT transacao_destino_fk FOREIGN KEY(contas_numero_destino)
+		REFERENCES contas(numero)
+
+);
