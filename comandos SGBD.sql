@@ -28,7 +28,6 @@ CREATE TABLE contas(
 
 CREATE TABLE agencias(
 	codigo INT,
-    agencia INT,
     nome VARCHAR(45) NOT NULL,
     endereco VARCHAR(200) NOT NULL,
     data_criacao DATETIME,
