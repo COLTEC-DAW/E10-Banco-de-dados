@@ -23,7 +23,7 @@ INSERT INTO agencias (codigo, nome, endereco, data_criacao) VALUES (
 INSERT INTO agencias (codigo, nome, endereco, data_criacao) VALUES (
 2, 'Ganimedes',
 'Santos Costa Souza, 16, 10654-496, BH, Minas Gerais',
-'2007-10-07' );
+'2021-10-07' );
 INSERT INTO agencias (codigo, nome, endereco, data_criacao) VALUES (
 3, 'Banco Isabel',
 'Avenida João Miguel, 4, 08689-083, BH, Minas Gerais',
@@ -38,6 +38,10 @@ INSERT INTO contas (numero, agencia, saldo, tipo, clientes_cpf) VALUES (
 INSERT INTO contas (numero, agencia, saldo, tipo, clientes_cpf) VALUES (
 112, 3,
 542.50, 'poupanca',
+'17705352280' );
+INSERT INTO contas (numero, agencia, saldo, tipo, clientes_cpf) VALUES (
+356, 2,
+7432.00, 'poupanca',
 '17705352280' );
 
 
