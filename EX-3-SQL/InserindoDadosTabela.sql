@@ -24,11 +24,17 @@ VALUES
 		'Sicob',
         'Cachoeirinha',
         '2015-04-11'
-    );
+    ),
+    (
+		'Itau',
+        'Belford Roxo',
+        '2020-06-01'
+    ); 
     
 INSERT INTO clientes (cpf,nome,endereco,telefone,data_nascimento) VALUES ('12575815629','Venancio', 'Bangu II', '31989235428','2003-08-06');
 INSERT INTO clientes (cpf,nome,endereco,telefone,data_nascimento) VALUES ('13574492601','Pedrinho', 'Condado de Urubici ', '33999506091','1999-05-09');
 INSERT INTO clientes (cpf,nome,endereco,telefone,data_nascimento) VALUES ('15423684555','Fernandinha Beira-Mar', 'Penitenciária Federal de Campo Grande', '33995732502','2010-03-08');
+INSERT INTO clientes (cpf,nome,endereco,telefone,data_nascimento) VALUES ('26548155654','Elias Maluco', 'Bangu I', '33945656584','2000-06-03');
 
 INSERT INTO contas (agencia,saldo,tipo,clientes_cpf)
 VALUES (1,800,'Conta Corrente','12575815629');  
@@ -57,8 +63,8 @@ VALUES
         1
     ),
     (
-		1,
-        1,
+		3,
+        3,
         2,
         2,
         '2020-06-10',
@@ -93,8 +99,8 @@ VALUES
         3
     ),
     (
-		1,
-        1,
+		3,
+        3,
         2,
         2,
         '2020-06-10',
