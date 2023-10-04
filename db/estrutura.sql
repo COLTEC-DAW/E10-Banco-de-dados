@@ -13,9 +13,7 @@ CREATE TABLE contas
     tipo VARCHAR (45),
     clientes_cpf VARCHAR (11),
 
-    CONSTRAINT pk_contas PRIMARY KEY (numero)--,
-    --CONSTRAINT fk_agencia FOREIGN KEY (agencia) REFERENCES agencias(codigo),
-    --CONSTRAINT fk_cliente FOREIGN KEY (clientes_cpf) REFERENCES clientes(cpf)
+    CONSTRAINT pk_contas PRIMARY KEY (numero)
 );
 
 CREATE TABLE agencias
@@ -39,11 +37,7 @@ CREATE TABLE transacoes
     valor DECIMAL (10,2),
     tipo ENUM('d', 's', 't'),
 
-    CONSTRAINT pk_transacoes PRIMARY KEY (id)--,
-    --CONSTRAINT fk_numero_origem FOREIGN KEY (contas_numero_origem) REFERENCES contas(numero),
-    --CONSTRAINT fk_agencia_origem FOREIGN KEY (contas_agencia_origem) REFERENCES contas(agencia),
-    --CONSTRAINT fk_numero_destino FOREIGN KEY (contas_numero_destino) REFERENCES contas(numero),
-    --CONSTRAINT fk_agencia_destino FOREIGN KEY (contas_agencia_destino) REFERENCES contas(agencia)
+    CONSTRAINT pk_transacoes PRIMARY KEY (id)
 );
 
 CREATE TABLE clientes
@@ -56,3 +50,23 @@ CREATE TABLE clientes
 
     CONSTRAINT pk_clientes PRIMARY KEY (cpf)
 );
+
+-- ADDING FOREIGN KEYS --
+
+ALTER TABLE contas
+ADD CONSTRAINT fk_agencia FOREIGN KEY (agencia) REFERENCES agencias(codigo);
+
+ALTER TABLE contas
+ADD CONSTRAINT fk_cliente FOREIGN KEY (clientes_cpf) REFERENCES clientes(cpf);
+
+ALTER TABLE transacoes
+ADD CONSTRAINT fk_numero_origem FOREIGN KEY (contas_numero_origem) REFERENCES contas(numero);
+
+ALTER TABLE transacoes
+ADD CONSTRAINT fk_agencia_origem FOREIGN KEY (contas_agencia_origem) REFERENCES contas(agencia);
+
+ALTER TABLE transacoes
+ADD CONSTRAINT fk_numero_destino FOREIGN KEY (contas_numero_destino) REFERENCES contas(numero);
+
+ALTER TABLE transacoes
+ADD CONSTRAINT fk_agencia_destino FOREIGN KEY (contas_agencia_destino) REFERENCES contas(agencia);
